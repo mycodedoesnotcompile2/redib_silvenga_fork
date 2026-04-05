@@ -81,6 +81,7 @@ jobs:
           
           - TARGET: x86_64-unknown-linux-musl
             OS: ubuntu-latest
+            CROSS_CHAIN: https://musl.cc/x86_64-linux-musl-cross.tgz
           
           - TARGET: aarch64-unknown-linux-gnu
             OS: ubuntu-24.04-arm
@@ -118,6 +119,7 @@ jobs:
       TARGET: ${{ matrix.TARGET }}
       OS: ${{ matrix.OS }}
       CONTAINER: ${{ matrix.CONTAINER }}
+      CROSS_CHAIN: ${{ matrix.CROSS_CHAIN }}
       
       REDLIB_PREBUILT_LATEST_TAG: ${{ needs.checkout.outputs.REDLIB_PREBUILT_LATEST_TAG }}
       REDLIB_VERSION: ${{ needs.checkout.outputs.REDLIB_VERSION }}
@@ -146,17 +148,25 @@ jobs:
             cargo install --force --locked bindgen-cli
           fi
 
+          if [[ -v $CROSS_CHAIN ]]; then 
+            mkdir -p /tmp/crosschain
+            cd /tmp/crosschain/
+            wget -nv "$CROSS_CHAIN" -o musl.tar.gz
+            tar -xzf musl.tar.gz
+            echo "$PWD/x86_64-linux-musl-cross/bin" >> $GITHUB_PATH
+          fi
+
           # some additional configuration for cross-compilation on linux
-          cat >>~/.cargo/config.toml <<EOF
-          [target.armv7-unknown-linux-gnueabihf]
-          linker = "arm-linux-gnueabihf-gcc"
-          [target.armv7-unknown-linux-musleabihf]
-          linker = "arm-linux-gnueabihf-gcc"
-          [target.arm-unknown-linux-gnueabihf]
-          linker = "arm-linux-gnueabihf-gcc"
-          [target.arm-unknown-linux-musleabihf]
-          linker = "arm-linux-gnueabihf-gcc"
-          EOF
+          # cat >>~/.cargo/config.toml <<EOF
+          # [target.armv7-unknown-linux-gnueabihf]
+          # linker = "arm-linux-gnueabihf-gcc"
+          # [target.armv7-unknown-linux-musleabihf]
+          # linker = "arm-linux-gnueabihf-gcc"
+          # [target.arm-unknown-linux-gnueabihf]
+          # linker = "arm-linux-gnueabihf-gcc"
+          # [target.arm-unknown-linux-musleabihf]
+          # linker = "arm-linux-gnueabihf-gcc"
+          # EOF
       
       - name: Install rust target
         run: rustup target add $TARGET
