@@ -148,16 +148,6 @@ jobs:
             cargo install --force --locked bindgen-cli
           fi
 
-          
-          if [[ -v $CROSS_CHAIN ]]; then 
-            echo "$CROSS_CHAIN"
-            mkdir -p /tmp/crosschain
-            cd /tmp/crosschain/
-            wget -nv "$CROSS_CHAIN" -o musl.tar.gz
-            tar -xzf musl.tar.gz
-            echo "$PWD/x86_64-linux-musl-cross/bin" >> $GITHUB_PATH
-          fi
-
           # some additional configuration for cross-compilation on linux
           # cat >>~/.cargo/config.toml <<EOF
           # [target.armv7-unknown-linux-gnueabihf]
@@ -169,6 +159,17 @@ jobs:
           # [target.arm-unknown-linux-musleabihf]
           # linker = "arm-linux-gnueabihf-gcc"
           # EOF
+
+      - name: Install cross-chain
+        run: |
+          if [[ -n "$CROSS_CHAIN" ]]; then 
+            echo "$CROSS_CHAIN"
+            mkdir -p /tmp/crosschain
+            cd /tmp/crosschain/
+            wget -nv "$CROSS_CHAIN" -o musl.tar.gz
+            tar -xzf musl.tar.gz
+            echo "$PWD/x86_64-linux-musl-cross/bin" >> $GITHUB_PATH
+          fi
       
       - name: Install rust target
         run: rustup target add $TARGET
