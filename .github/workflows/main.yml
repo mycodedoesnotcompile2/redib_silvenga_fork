@@ -173,6 +173,7 @@ jobs:
             wget -nv "https://muslcc.alwaysdata.net/SHA512SUMS"
             sha512sum -c SHA512SUMS --ignore-missing
             tar -xzf "$CROSS_CHAIN-cross.tgz"
+            ls -alh "$PWD/$CROSS_CHAIN-cross/bin"
             echo "$PWD/$CROSS_CHAIN-cross/bin" >> $GITHUB_PATH
           fi
       
