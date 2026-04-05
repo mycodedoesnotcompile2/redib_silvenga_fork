@@ -15,6 +15,9 @@ env:
   REDLIB_BIN_NAME: redlib-silvenga
   APT: sudo apt -y -qq -o=Dpkg::Use-Pty=0
 
+  CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
+  CC_aarch64_unknown_linux_gnu: aarch64-linux-gnu-gcc
+
 defaults:
   run:
     shell: bash
