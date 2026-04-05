@@ -86,23 +86,23 @@ jobs:
           - TARGET: aarch64-unknown-linux-gnu
             OS: ubuntu-24.04-arm
           
-          - TARGET: aarch64-unknown-linux-musl
-            OS: ubuntu-24.04-arm
-            CROSS_CHAIN: aarch64-linux-musl-native
+          # - TARGET: aarch64-unknown-linux-musl
+          #   OS: ubuntu-24.04-arm
+          #   CROSS_CHAIN: aarch64-linux-musl-native
 
           # - TARGET: armv7-unknown-linux-gnueabihf
           #   OS: ubuntu-latest
           
-          - TARGET: armv7-unknown-linux-musleabihf
-            OS: ubuntu-latest
-            CROSS_CHAIN: arm-linux-musleabihf-cross
+          # - TARGET: armv7-unknown-linux-musleabihf
+          #   OS: ubuntu-latest
+          #   CROSS_CHAIN: arm-linux-musleabihf-cross
           
           # - TARGET: arm-unknown-linux-gnueabihf
           #   OS: ubuntu-latest
 
-          - TARGET: arm-unknown-linux-musleabihf
-            OS: ubuntu-latest
-            CROSS_CHAIN: arm-linux-musleabihf-cross
+          # - TARGET: arm-unknown-linux-musleabihf
+          #   OS: ubuntu-latest
+          #   CROSS_CHAIN: arm-linux-musleabihf-cross
           
           - TARGET: aarch64-apple-darwin
             OS: macos-latest
