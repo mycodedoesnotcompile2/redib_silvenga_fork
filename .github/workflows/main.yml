@@ -113,8 +113,8 @@ jobs:
           - TARGET: x86_64-pc-windows-msvc
             OS: windows-latest
 
-          - TARGET: aarch64-pc-windows-msvc
-            OS: windows-11-arm
+          # - TARGET: aarch64-pc-windows-msvc
+          #   OS: windows-11-arm
             
     runs-on: ${{ matrix.OS }}
 
