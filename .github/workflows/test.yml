@@ -110,7 +110,7 @@ jobs:
             OS: windows-latest
 
           - TARGET: aarch64-pc-windows-msvc
-            OS: windows-11-arm
+            OS: windows-latest
             
     runs-on: ${{ matrix.OS }}
 
