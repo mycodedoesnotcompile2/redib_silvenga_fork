@@ -146,7 +146,8 @@ jobs:
           #   cd "$REDLIB_ROOT_DIR"
           #   cargo install --force --locked bindgen-cli
           # fi
-          
+          cd "$REDLIB_ROOT_DIR"
+          cargo install --force --locked bindgen-cli
           cargo install cross
           
           # #some additional configuration for cross-compilation on linux
