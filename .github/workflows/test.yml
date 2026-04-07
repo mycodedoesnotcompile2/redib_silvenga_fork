@@ -187,8 +187,12 @@ jobs:
         
       - name: Run build
         run: |
+          COMPILER="cargo"
+          if [[ $TARGET == *"-musl"* ]]; then
+              COMPILER="cross"
+          fi
           cd $REDLIB_ROOT_DIR
-          cross build --release --target $TARGET
+          $COMPILER build --release --target $TARGET
       
       - name: List build information
         run: |
