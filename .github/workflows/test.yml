@@ -128,6 +128,9 @@ jobs:
         run: |
           cd /tmp/
           git clone "$REDLIB_REPO" --branch "switch-to-wreq" --single-branch redlib
+
+      #- name: Install rust target
+      #  run: rustup target add $TARGET
       
       - name: Install and configure dependencies
         run: |
@@ -148,7 +151,7 @@ jobs:
           # fi
           cd "$REDLIB_ROOT_DIR"
           cargo install --force --locked bindgen-cli
-          cargo install cross
+          cargo install cross --target $TARGET
           
           # #some additional configuration for cross-compilation on linux
           # cat >>~/.cargo/config.toml <<EOF
@@ -180,8 +183,7 @@ jobs:
       #       echo "$PWD/$CROSS_CHAIN/bin" >> $GITHUB_PATH
       #     fi
       
-      # - name: Install rust target
-      #   run: rustup target add $TARGET
+
         
       - name: Run build
         run: |
