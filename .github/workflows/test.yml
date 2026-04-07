@@ -95,10 +95,10 @@ jobs:
             OS: ubuntu-latest
           
           - TARGET: arm-unknown-linux-gnueabihf
-            OS: ubuntu-latest
+            OS: ubuntu-24.04-arm
 
           - TARGET: arm-unknown-linux-musleabihf
-            OS: ubuntu-latest
+            OS: ubuntu-24.04-arm
           
           - TARGET: aarch64-apple-darwin
             OS: macos-latest
@@ -129,8 +129,8 @@ jobs:
           cd /tmp/
           git clone "$REDLIB_REPO" --branch "switch-to-wreq" --single-branch redlib
 
-      #- name: Install rust target
-      #  run: rustup target add $TARGET
+      - name: Install rust target
+        run: rustup target add $TARGET
       
       - name: Install and configure dependencies
         run: |
