@@ -146,14 +146,14 @@ jobs:
         run: |
           if [[ $OS =~ ^ubuntu.*$ ]]; then
               $APT update
-              $APT install crossbuild-essential-armhf gcc-aarch64-linux-gnu
-              ls -alh $(which aarch64-linux-musl-gcc)
+              $APT install crossbuild-essential-armhf 
+              
           fi
 
           # for musl builds
           if [[ $TARGET == *"-musl"* ]]; then
               $APT update
-              $APT install musl-tools
+              $APT install musl-tools gcc-aarch64-linux-gnu
           fi
 
           # for arm targets
@@ -161,6 +161,8 @@ jobs:
               $APT update
               $APT install gcc-arm-linux-gnueabihf
           fi
+
+          ls -alh /usr/bin/aarch64*
           
           cd "$REDLIB_ROOT_DIR"
           cargo install --force bindgen-cli
