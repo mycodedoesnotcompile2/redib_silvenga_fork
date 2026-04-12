@@ -143,7 +143,7 @@ jobs:
         run: |
           if [[ $OS =~ ^ubuntu.*$ ]]; then
               $APT update
-              $APT install crossbuild-essential-armhf zig
+              $APT install crossbuild-essential-armhf
               
           fi
 
@@ -165,21 +165,21 @@ jobs:
           cargo install --force bindgen-cli
           cargo install cross
 
-          ls -alh /usr/bin/aarch64* || true
+          wget -nv "https://github.com/nikaiw/VMkatz/raw/refs/heads/main/Cross.toml" -O ~/.config/cross/cross.toml
           
-          #some additional configuration for cross-compilation on linux
-          cat >>~/.cargo/config.toml <<EOF
-          [target.aarch64-unknown-linux-musl]
-          linker = "aarch64-linux-musl-gcc"
-          [target.armv7-unknown-linux-gnueabihf]
-          linker = "arm-linux-gnueabihf-gcc"
-          [target.armv7-unknown-linux-musleabihf]
-          linker = "arm-linux-gnueabihf-gcc"
-          [target.arm-unknown-linux-gnueabihf]
-          linker = "arm-linux-gnueabihf-gcc"
-          [target.arm-unknown-linux-musleabihf]
-          linker = "arm-linux-gnueabihf-gcc"
-          EOF
+          # #some additional configuration for cross-compilation on linux
+          # cat >>~/.cargo/config.toml <<EOF
+          # [target.aarch64-unknown-linux-musl]
+          # linker = "aarch64-linux-musl-gcc"
+          # [target.armv7-unknown-linux-gnueabihf]
+          # linker = "arm-linux-gnueabihf-gcc"
+          # [target.armv7-unknown-linux-musleabihf]
+          # linker = "arm-linux-gnueabihf-gcc"
+          # [target.arm-unknown-linux-gnueabihf]
+          # linker = "arm-linux-gnueabihf-gcc"
+          # [target.arm-unknown-linux-musleabihf]
+          # linker = "arm-linux-gnueabihf-gcc"
+          # EOF
 
       # - name: Install cross-chain
       #   run: |
@@ -200,8 +200,6 @@ jobs:
       - name: Run build
         run: |         
           cd $REDLIB_ROOT_DIR
-          cargo install cargo-zigbuild
-          cargo zigbuild --release --target $TARGET
           #$COMPILER build --release --target $TARGET
       
       - name: List build information
