@@ -162,7 +162,7 @@ jobs:
               $APT install gcc-arm-linux-gnueabihf
           fi
 
-          ls -alh /usr/bin/aarch64*
+          ls -alh /usr/bin/aarch64* || true
           
           cd "$REDLIB_ROOT_DIR"
           cargo install --force bindgen-cli
