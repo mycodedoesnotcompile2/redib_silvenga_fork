@@ -166,7 +166,7 @@ jobs:
           
           cd "$REDLIB_ROOT_DIR"
           cargo install --force bindgen-cli
-          cargo install cross
+          sudo cargo install cross
 
           ls -alh /usr/bin/aarch64* || true
           
