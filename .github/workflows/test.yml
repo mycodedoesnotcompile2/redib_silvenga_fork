@@ -143,7 +143,7 @@ jobs:
         run: |
           if [[ $OS =~ ^ubuntu.*$ ]]; then
               $APT update
-              $APT install crossbuild-essential-armhf
+              $APT install crossbuild-essential-armhf 
           fi
 
           # for musl builds
@@ -162,21 +162,19 @@ jobs:
           cargo install --force bindgen-cli
           cargo install cross
           
-          # #some additional configuration for cross-compilation on linux
-          # cat >>~/.cargo/config.toml <<EOF
-          # [target.armv7-unknown-linux-gnueabihf]
-          # linker = "arm-linux-gnueabihf-gcc"
-          # [target.armv7-unknown-linux-musleabihf]
-          # linker = "arm-linux-gnueabihf-gcc"
-          # [target.arm-unknown-linux-gnueabihf]
-          # linker = "arm-linux-gnueabihf-gcc"
-          # [target.arm-unknown-linux-musleabihf]
-          # linker = "arm-linux-gnueabihf-gcc"
-          # [profile.release]
-          # lto = false
-          # [target.aarch64-unknown-linux-gnu]
-          # rustflags = ["-C", "lto=no"]
-          # EOF
+          #some additional configuration for cross-compilation on linux
+          cat >>~/.cargo/config.toml <<EOF
+          [target.aarch64-unknown-linux-musl]
+          linker = "aarch64-linux-musl-gcc"
+          [target.armv7-unknown-linux-gnueabihf]
+          linker = "arm-linux-gnueabihf-gcc"
+          [target.armv7-unknown-linux-musleabihf]
+          linker = "arm-linux-gnueabihf-gcc"
+          [target.arm-unknown-linux-gnueabihf]
+          linker = "arm-linux-gnueabihf-gcc"
+          [target.arm-unknown-linux-musleabihf]
+          linker = "arm-linux-gnueabihf-gcc"
+          EOF
 
       # - name: Install cross-chain
       #   run: |
