@@ -140,7 +140,7 @@ jobs:
         run: |
           rustup toolchain install stable-aarch64-unknown-linux-gnu --force-non-host
           rustup default stable --force-non-host
-          rustup target add $TARGET --force-non-host
+          rustup target add $TARGET
       
       - name: Install and configure dependencies
         run: |
