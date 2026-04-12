@@ -138,9 +138,9 @@ jobs:
 
       - name: Install rust target
         run: |
-          rustup toolchain install stable-aarch64-unknown-linux-gnu
-          rustup default stable
-          rustup target add $TARGET
+          rustup toolchain install stable-aarch64-unknown-linux-gnu --force-non-host
+          rustup default stable --force-non-host
+          rustup target add $TARGET --force-non-host
       
       - name: Install and configure dependencies
         run: |
